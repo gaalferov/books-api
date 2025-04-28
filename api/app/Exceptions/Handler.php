@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Exceptions;
+
+use App\Utils\JsonResponseUtil;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
+
+class Handler extends ExceptionHandler
+{
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
+     */
+    public function render($request, Throwable $e): Response
+    {
+        if ($request->is('api/*')) {
+            return JsonResponseUtil::errorResponse(
+                (method_exists($e, 'errors') || $e instanceof ErrorContextException)
+                    ? $e->errors()
+                    : ['message' => $e->getMessage(), 'code' => $e->getCode()],
+                $this->getStatusCode($e)
+            );
+        }
+
+        return parent::render($request, $e);
+    }
+
+    private function getStatusCode(Throwable $e)
+    {
+        if (method_exists($e, 'getStatusCode')) {
+            return $e->getStatusCode();
+        }
+
+        if ($e instanceof HttpException) {
+            return $e->getStatusCode();
+        }
+
+        return Response::HTTP_INTERNAL_SERVER_ERROR;
+    }
+}

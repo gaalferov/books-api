@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V1\Book;
 
+use App\Http\Requests\Book\BookHistoryRequest;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OA;
 
@@ -31,7 +32,7 @@ class BookHistoryController extends BookController
             )
         ]
     )]
-    public function __invoke(): JsonResponse
+    public function __invoke(BookHistoryRequest $historyRequest): JsonResponse
     {
         return response()->json([
             'message' => 'Book history endpoint',

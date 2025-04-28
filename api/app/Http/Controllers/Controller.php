@@ -4,35 +4,23 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Domain\Enums\Status;
+use App\Utils\JsonResponseUtil;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class Controller
 {
-    public function successResponse(
+    public static function successResponse(
         array $data,
         int $statusCode = Response::HTTP_OK
     ): JsonResponse {
-        return response()->json(
-            [
-                'status' => Status::SUCCESS->value,
-                'data' => $data,
-            ],
-            $statusCode
-        );
+        return JsonResponseUtil::successResponse($data, $statusCode);
     }
 
-    public function errorResponse(
+    public static function errorResponse(
         array $errorsData = [],
         int $statusCode = Response::HTTP_BAD_REQUEST,
     ): JsonResponse {
-        return response()->json(
-            [
-                'status' => Status::ERROR->value,
-                'errors' => $errorsData,
-            ],
-            $statusCode
-        );
+        return JsonResponseUtil::errorResponse($errorsData, $statusCode);
     }
 }

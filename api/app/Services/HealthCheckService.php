@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Services;
+namespace App\Services;
 
-use App\Domain\Enums\Status;
-use App\Domain\Exceptions\HealthCheck\HealthCheckFailedException;
+use App\Enums\Status;
+use App\Exceptions\HealthCheck\HealthCheckFailedException;
 use BadMethodCallException;
 use Exception;
 use Illuminate\Support\Facades\Cache;
