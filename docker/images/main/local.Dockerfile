@@ -75,7 +75,7 @@ COPY ./api /var/www/html
 COPY ./docker/conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/conf/nginx/nginx.conf /etc/nginx/nginx.conf
 
-RUN mkdir -p /var/www/html/var && \
+RUN mkdir -p /var/www/html/storage && \
     mkdir -p /var/www/html/vendor
 
 # forward request and error logs to docker log collector
@@ -91,7 +91,7 @@ RUN usermod -u 1000 -g www-data www-data  \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/cache/nginx \
     && chmod -R 755 /etc/nginx \
-    && chmod -R 777 /var/www/html/var \
+    && chmod -R 777 /var/www/html/storage \
     && chmod -R 777 /var/lib/nginx/logs \
     && chmod -R 777 /var/lib/nginx
 
