@@ -1,0 +1,26 @@
+services:
+  books-api:
+    container_name: books-api
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/images/main/local.Dockerfile
+    environment:
+      PHP_IDE_CONFIG: "serverName=books-api"
+      XDEBUG_CONFIG: "start_with_request=yes client_host=host.docker.internal"
+    volumes:
+      - ./api/:/var/www/html:rw
+      - .env:/var/www/html/.env:rw
+    ports:
+      - ${WEBSERVER_PORT:-8080}:8080
+    networks:
+      - default_network
+
+  redis:
+    image: redis:alpine
+    networks:
+      - default_network
+
+networks:
+  default_network:
+    driver: bridge

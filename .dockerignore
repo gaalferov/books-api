@@ -1,0 +1,5 @@
+.git/
+.conf/
+.gitignore
+/api/tests
+compose.*
