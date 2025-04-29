@@ -24,7 +24,7 @@ To run this project locally, you need the following tools installed:
 2. **Docker & Docker Compose** (Runs the application and its services in containers)
     - [Install Docker](https://docs.docker.com/get-docker/) & [Install Docker Compose](https://docs.docker.com/compose/install/).
 
-## Installation & Configuration
+## Installation
 
 1. Clone the repository:
 ```bash
