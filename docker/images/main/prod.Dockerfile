@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64 php:8.3-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 RUN apk --no-cache add shadow
 
@@ -38,19 +38,9 @@ RUN docker-php-ext-configure intl \
         soap \
         opcache
 
-# Install Socket extension
-RUN docker-php-ext-configure sockets \
-    && docker-php-ext-install sockets \
-    && docker-php-ext-enable sockets
-
-# Install Postgre PDO
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
-    docker-php-ext-install pdo_pgsql pgsql && \
-    docker-php-ext-enable pdo_pgsql
-
-# AMQP (uncomment if needed)
-#RUN pecl install amqp \
-#    && docker-php-ext-enable amqp
+# Install Redis
+RUN pecl install redis \
+    && docker-php-ext-enable redis
 
 #cachetool
 COPY ./docker/conf/php/cachetool.yml /etc/cachetool.yml
@@ -75,7 +65,7 @@ COPY ./docker/conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/conf/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/conf/php/php-fpm-www.conf /usr/local/etc/php-fpm.d/www.conf
 
-RUN mkdir -p /var/www/html/var && \
+RUN mkdir -p /var/www/html/storage && \
     mkdir -p /var/www/html/vendor
 
 # forward request and error logs to docker log collector
@@ -94,12 +84,18 @@ RUN usermod -u 1000 -g www-data www-data  \
     && chmod -R 755 /usr/local/etc/php-fpm.d \
     && chmod -R 777 /var/lib/nginx/logs \
     && chmod -R 777 /var/cache/nginx \
-    && chmod -R 777 /var/www/html/var
+    && chmod -R 777 /var/www/html/storage
 
 # composer
 RUN composer clearcache \
     && composer install --no-interaction --no-scripts \
     && composer dumpautoload -o
+
+# Generate Swagger documentation
+RUN php artisan l5-swagger:generate
+
+# Generate APP_KEY if not already set
+RUN if [ -z "$(grep '^APP_KEY=' .env | cut -d '=' -f2)" ]; then php artisan key:generate; fi
 
 # configure php opcache after all php extensions are installed
 ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0"

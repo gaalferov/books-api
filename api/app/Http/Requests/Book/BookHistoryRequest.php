@@ -15,9 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BookHistoryRequest extends FormRequest
 {
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
@@ -27,13 +24,13 @@ class BookHistoryRequest extends FormRequest
             'isbn' => [
                 'nullable',
                 'string',
-                'regex:/^(\d{10}|\d{13})$/'
+                'regex:/^(\d{10}|\d{13})$/',
             ],
             'offset' => 'nullable|integer|min:0|multiple_of:20',
             'price' => [
                 'nullable',
                 'string',
-                'regex:/^\d+(\.\d{1,2})?$/'
+                'regex:/^\d+(\.\d{1,2})?$/',
             ],
             'publisher' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',

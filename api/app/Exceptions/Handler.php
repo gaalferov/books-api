@@ -6,6 +6,7 @@ namespace App\Exceptions;
 
 use App\Utils\JsonResponseUtil;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
@@ -15,14 +16,19 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Throwable $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @throws Throwable
      */
     public function render($request, Throwable $e): Response
     {
         if ($request->is('api/*')) {
+            Log::error($e->getMessage(), [
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
             $errorsData = (method_exists($e, 'errors') || $e instanceof ErrorContextException)
                 ? $e->errors()
                 : ['message' => $e->getMessage(), 'code' => $e->getCode()];

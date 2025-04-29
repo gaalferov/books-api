@@ -6,6 +6,4 @@ namespace App\Http\Controllers\API\V1\Book;
 
 use App\Http\Controllers\Controller;
 
-class BookController extends Controller
-{
-}
+class BookController extends Controller {}

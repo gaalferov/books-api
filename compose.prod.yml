@@ -1,0 +1,31 @@
+services:
+  books-api:
+    container_name: books-api
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/images/main/prod.Dockerfile
+    volumes:
+      - .env:/var/www/html/.env:rw
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.booksapi.tls=true"
+      - "traefik.http.routers.booksapi.entrypoints=websecure"
+      - "traefik.http.routers.booksapi.rule=Host(`sometestnewdomain.co.uk`)"
+      - "traefik.docker.network=traefik-net"
+    networks:
+      - traefik-net
+
+  redis:
+    image: redis:alpine
+    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - traefik-net
+
+networks:
+  default_network:
+    driver: bridge
+  traefik-net:
+    external: true

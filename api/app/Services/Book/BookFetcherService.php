@@ -13,20 +13,20 @@ use Illuminate\Foundation\Http\FormRequest;
 readonly class BookFetcherService
 {
     /**
-     * @param BookProvider[] $providers
+     * @param  BookProvider[]  $providers
      */
     public function __construct(
         private readonly array $providers
     ) {}
 
-    public function fetchBooks(FormRequest $formRequest, string $providerName = null): BookListData
+    public function fetchBooks(FormRequest $formRequest, ?string $providerName = null): BookListData
     {
         if ($providerName === null) {
             // If no name is provided, use the first provider in the list
             $providerName = array_key_first($this->providers);
         }
 
-        if (!isset($this->providers[$providerName])) {
+        if (! isset($this->providers[$providerName])) {
             throw new \InvalidArgumentException("Provider '{$providerName}' is not supported.");
         }
 

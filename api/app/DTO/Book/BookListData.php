@@ -6,5 +6,5 @@ namespace App\DTO\Book;
 
 interface BookListData
 {
-    public function getBooksAsArray() : array;
+    public function getBooksAsArray(): array;
 }

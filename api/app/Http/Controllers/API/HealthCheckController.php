@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API;
 
-use App\Services\HealthCheckService;
 use App\Http\Controllers\Controller;
+use App\Services\HealthCheckService;
 use App\Utils\JsonResponseUtil;
 use Illuminate\Http\JsonResponse;
 

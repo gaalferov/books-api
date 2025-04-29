@@ -35,7 +35,7 @@ class HealthCheckFailedException extends RuntimeException implements ErrorContex
         return [
             'code' => $this->getCode(),
             'message' => $this->getMessage(),
-            'context' => $this->getContext()
+            'context' => $this->getContext(),
         ];
     }
 }

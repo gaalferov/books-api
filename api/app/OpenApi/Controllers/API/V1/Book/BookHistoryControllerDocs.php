@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\OpenApi\Controllers\API\V1\Book;
 
-use App\Http\Controllers\API\V1\Book\BookHistoryController;
-use OpenApi\Attributes as OA;
 use App\Enums\Status;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Response;
 
 #[OA\Tag(
@@ -75,39 +74,39 @@ class BookHistoryControllerDocs extends BookControllerDocs
                 description: 'Successful response',
                 content: new OA\JsonContent(
                     type: 'object',
-                              properties: [
-                                  new OA\Property(
-                                      property: 'status',
-                                      type: 'string',
-                                      example: Status::SUCCESS->value
-                                  ),
-                                  new OA\Property(
-                                      property: 'data',
-                                      type: 'array',
-                                      items: new OA\Items(ref: '#/components/schemas/BookDTO')
-                                  )
-                          ]
+                    properties: [
+                        new OA\Property(
+                            property: 'status',
+                            type: 'string',
+                            example: Status::SUCCESS->value
+                        ),
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(ref: '#/components/schemas/BookDTO')
+                        ),
+                    ]
                 )
             ),
             new OA\Response(
                 response: Response::HTTP_UNPROCESSABLE_ENTITY,
                 description: 'Validation error',
                 content: new OA\JsonContent(
-                type: 'object',
-                properties: [
+                    type: 'object',
+                    properties: [
                         new OA\Property(
                             property: 'status',
                             type: 'string',
                             example: Status::ERROR->value
                         ),
                         new OA\Property(
-                          property: 'errors',
-                          type: 'object',
-                          additionalProperties: new OA\AdditionalProperties(
-                            type: 'array',
-                            items: new OA\Items(type: 'string', example: 'The title field is required.')
-                          )
-                        )
+                            property: 'errors',
+                            type: 'object',
+                            additionalProperties: new OA\AdditionalProperties(
+                                type: 'array',
+                                items: new OA\Items(type: 'string', example: 'The title field is required.')
+                            )
+                        ),
                     ]
                 )
             ),
@@ -117,30 +116,30 @@ class BookHistoryControllerDocs extends BookControllerDocs
                 content: new OA\JsonContent(
                     type: 'object',
                     properties: [
-                            new OA\Property(
-                                property: 'status',
-                                type: 'string',
-                                example: Status::ERROR->value
-                            ),
-                            new OA\Property(
-                                property: 'errors',
-                                type: 'object',
-                                properties: [
-                                    new OA\Property(
-                                      property: 'message',
-                                      type: 'string',
-                                      example: 'An unexpected error occurred. Please try again later.'
-                                    ),
-                                    new OA\Property(
-                                      property: 'code',
-                                      type: 'integer',
-                                      example: 500
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-            )
+                        new OA\Property(
+                            property: 'status',
+                            type: 'string',
+                            example: Status::ERROR->value
+                        ),
+                        new OA\Property(
+                            property: 'errors',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(
+                                    property: 'message',
+                                    type: 'string',
+                                    example: 'An unexpected error occurred. Please try again later.'
+                                ),
+                                new OA\Property(
+                                    property: 'code',
+                                    type: 'integer',
+                                    example: 500
+                                ),
+                            ]
+                        ),
+                    ]
+                )
+            ),
         ]
     )]
     public static function get(): void {}

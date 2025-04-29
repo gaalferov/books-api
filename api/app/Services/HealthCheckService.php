@@ -19,11 +19,10 @@ class HealthCheckService
 {
     private const CHECKED_SERVICES = [
         'redis',
-        'cache'
+        'cache',
     ];
 
     /**
-     * @return array
      * @throws HealthCheckFailedException|BadMethodCallException
      */
     public function checkServices(): array
@@ -31,11 +30,11 @@ class HealthCheckService
         $hasErrors = false;
         $serviceStatus = [];
         foreach (self::CHECKED_SERVICES as $service) {
-            if (!method_exists($this, 'is' . ucfirst($service) . 'Available')) {
+            if (! method_exists($this, 'is'.ucfirst($service).'Available')) {
                 throw new BadMethodCallException("Method is{$service}Available does not exist");
             }
 
-            $method = 'is' . ucfirst($service) . 'Available';
+            $method = 'is'.ucfirst($service).'Available';
             $serviceStatus[$service] = $this->$method()
                 ? Status::SUCCESS->value
                 : Status::ERROR->value;

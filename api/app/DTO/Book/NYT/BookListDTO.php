@@ -17,6 +17,6 @@ class BookListDTO extends Data implements BookListData
 
     public function getBooksAsArray(): array
     {
-        return array_map(fn($book) => $book->toArray(), $this->results);
+        return array_map(fn ($book) => $book->toArray(), $this->results);
     }
 }

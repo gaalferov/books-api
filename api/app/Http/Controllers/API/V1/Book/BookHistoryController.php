@@ -16,7 +16,6 @@ class BookHistoryController extends BookController
     ) {}
 
     /**
-     * Swagger documentation for the BookHistoryController
      * @see \App\OpenApi\Controllers\API\V1\Book\BookHistoryControllerDocs::get()
      */
     public function __invoke(BookHistoryRequest $historyRequest): JsonResponse

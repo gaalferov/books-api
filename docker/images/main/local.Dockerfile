@@ -100,6 +100,11 @@ RUN composer clearcache \
     && composer install --no-interaction --no-scripts \
     && composer dumpautoload -o
 
+# Generate APP_KEY if not already set
+RUN if [ -z "$(grep '^APP_KEY=' .env | cut -d '=' -f2)" ]; then php artisan key:generate; fi
+
+# Generate Swagger documentation
+RUN php artisan l5-swagger:generate
 
 STOPSIGNAL SIGTERM
 USER www-data
