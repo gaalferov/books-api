@@ -17,6 +17,15 @@ class HealthcheckTest extends TestCase
      */
     public function test_healthcheck_returns_successful_response(): void
     {
+        // Mock the HealthCheckService to simulate a successful response
+        $this->mock(HealthCheckService::class, function ($mock) {
+            $mock->shouldReceive('checkServices')
+                ->andReturn([
+                    'redis' => 'OK',
+                    'cache' => 'OK',
+                ]);
+        });
+
         // Act
         $response = $this->getJson('/api/healthcheck');
 
