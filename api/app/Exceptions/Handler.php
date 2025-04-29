@@ -23,12 +23,15 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e): Response
     {
         if ($request->is('api/*')) {
-            return JsonResponseUtil::errorResponse(
-                (method_exists($e, 'errors') || $e instanceof ErrorContextException)
-                    ? $e->errors()
-                    : ['message' => $e->getMessage(), 'code' => $e->getCode()],
-                $this->getStatusCode($e)
-            );
+            $errorsData = (method_exists($e, 'errors') || $e instanceof ErrorContextException)
+                ? $e->errors()
+                : ['message' => $e->getMessage(), 'code' => $e->getCode()];
+
+            if (config('app.debug')) {
+                $errorsData['trace'] = $e->getTrace();
+            }
+
+            return JsonResponseUtil::errorResponse($errorsData, $this->getStatusCode($e));
         }
 
         return parent::render($request, $e);
@@ -42,6 +45,10 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof HttpException) {
             return $e->getStatusCode();
+        }
+
+        if ($e->getCode() >= 400 && $e->getCode() < 600) {
+            return $e->getCode();
         }
 
         return Response::HTTP_INTERNAL_SERVER_ERROR;

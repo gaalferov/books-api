@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Book;
 
-use App\Http\Controllers\Controller;
+use App\Utils\JsonResponseUtil;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,9 +26,6 @@ class BookHistoryRequest extends FormRequest
             'contributor' => 'nullable|string|max:255',
             'isbn' => [
                 'nullable',
-                'array',
-            ],
-            'isbn.*' => [
                 'string',
                 'regex:/^(\d{10}|\d{13})$/'
             ],
@@ -44,7 +43,7 @@ class BookHistoryRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            Controller::errorResponse(
+            JsonResponseUtil::errorResponse(
                 $validator->errors()->toArray(),
                 Response::HTTP_UNPROCESSABLE_ENTITY
             )

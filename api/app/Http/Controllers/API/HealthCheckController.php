@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API;
 
 use App\Services\HealthCheckService;
 use App\Http\Controllers\Controller;
+use App\Utils\JsonResponseUtil;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -19,6 +20,8 @@ class HealthCheckController extends Controller
 
     public function __invoke(): JsonResponse
     {
-        return self::successResponse($this->healthCheckService->checkServices());
+        return JsonResponseUtil::successResponse(
+            $this->healthCheckService->checkServices()
+        );
     }
 }
