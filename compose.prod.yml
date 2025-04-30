@@ -8,6 +8,7 @@ services:
 #    image: some-artifactiry-place.com/books-api:latest
     volumes:
       - .env:/var/www/html/.env:rw
+      - ./api/storage/:/var/www/html/storage:rw
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.booksapi.tls=true"
