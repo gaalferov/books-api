@@ -32,6 +32,31 @@ jobs:
         working-directory: ./api
         run: composer validate
 
+  code-style-check:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        php-versions: [ '8.3' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        id: setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, curl, json, openssl
+
+      - name: Get PHP version
+        run: php -v
+
+      - name: Run Laravel Pint code style check
+        working-directory: ./api
+        run: composer require laravel/pint --dev && ./vendor/bin/pint --test
+
   tests:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -68,6 +93,6 @@ jobs:
         working-directory: ./api
         run: composer install --prefer-dist --no-progress
 
-      - name: Run Unit tests
+      - name: Run tests
         working-directory: ./api
         run: php artisan test

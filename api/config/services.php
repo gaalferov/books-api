@@ -39,9 +39,9 @@ return [
         'providers' => [
             'nytimes' => [
                 'api_key' => env('NYTIMES_API_KEY'),
-                'base_url' => env('NYTIMES_API_BASE_URL'),
+                'base_url' => env('NYTIMES_API_BASE_URL', 'https://api.nytimes.com'),
                 'cache' => [
-                    'enabled' => env('NYTIMES_CACHE_ENABLED', false),
+                    'enabled' => env('NYTIMES_CACHE_ENABLED', true),
                     'ttl' => env('NYTIMES_CACHE_TTL', 3600),
                 ],
             ],

@@ -21,11 +21,6 @@ readonly class BookFetcherService
 
     public function fetchBooks(FormRequest $formRequest, ?string $providerName = null): BookListData
     {
-        if ($providerName === null) {
-            // If no name is provided, use the first provider in the list
-            $providerName = array_key_first($this->providers);
-        }
-
         if (! isset($this->providers[$providerName])) {
             throw new \InvalidArgumentException("Provider '{$providerName}' is not supported.");
         }
