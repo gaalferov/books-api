@@ -6,8 +6,7 @@ A Laravel-based API for getting books info, built with Clean Architecture princi
 ## Table of Contents
 - [Demo](#demo)
 - [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Installation Local](#installation-local)
 - [Testing](#testing)
 - [Technical Details](#technical-details)
 
@@ -27,7 +26,7 @@ To run this project locally, you need the following tools installed:
 2. **Docker & Docker Compose** (Runs the application and its services in containers)
     - [Install Docker](https://docs.docker.com/get-docker/) & [Install Docker Compose](https://docs.docker.com/compose/install/).
 
-## Installation
+## Installation Local
 
 1. Clone the repository:
 ```bash
@@ -54,8 +53,7 @@ make build-and-run
 # • pint-test                 Run Pint test
 # • pint-fix                  Run Pint fix
 ```
-
-## Usage
+5. Access the local application:
 - **App Healthcheck**: [/api/healthcheck](http://localhost:8080/api/healthcheck) (localhost)
 - **Swagger Documentation**: [/api/v1/doc](http://localhost:8080/api/v1/doc) (localhost)
 - **Books History API**: [/api/v1/books/history](http://localhost:8080/api/v1/books/history) (localhost)
