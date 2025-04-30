@@ -5,6 +5,7 @@ services:
     build:
       context: ./
       dockerfile: ./docker/images/main/prod.Dockerfile
+#    image: some-artifactiry-place.com/books-api:latest
     volumes:
       - .env:/var/www/html/.env:rw
     labels:

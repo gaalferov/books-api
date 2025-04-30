@@ -91,12 +91,6 @@ RUN composer clearcache \
     && composer install --no-interaction --no-scripts \
     && composer dumpautoload -o
 
-# Generate Swagger documentation
-RUN php artisan l5-swagger:generate
-
-# Generate APP_KEY if not already set
-RUN if [ -z "$(grep '^APP_KEY=' .env | cut -d '=' -f2)" ]; then php artisan key:generate; fi
-
 # configure php opcache after all php extensions are installed
 ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0"
 COPY ./docker/conf/php/opcache.blacklist.txt /usr/local/etc/php/conf.d/opcache.blacklist.txt
