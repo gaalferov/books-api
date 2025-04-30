@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\DTO\Book\NYT;
 
 use App\DTO\Book\BookListData;
+use Spatie\LaravelData\Attributes\MapInputName;
+use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
 
 class BookListDTO extends Data implements BookListData
 {
     public function __construct(
-        public readonly int $num_results,
+        #[MapInputName('num_results'), MapOutputName('num_results')]
+        public readonly int $numResults,
         /** @var BookDTO[] */
         public readonly array $results
     ) {}

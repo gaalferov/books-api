@@ -89,7 +89,7 @@ class HealthcheckTest extends TestCase
             ->assertJson([
                 'status' => 'ERROR',
                 'errors' => [
-                    'code' => 0,
+                    'code' => 500,
                     'message' => 'Unexpected error',
                 ],
             ]);
@@ -113,7 +113,7 @@ class HealthcheckTest extends TestCase
             ->assertJson([
                 'status' => 'ERROR',
                 'errors' => [
-                    'code' => 0,
+                    'code' => 500,
                     'message' => 'Method does not exist',
                 ],
             ]);

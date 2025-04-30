@@ -31,7 +31,7 @@ class Handler extends ExceptionHandler
 
             $errorsData = (method_exists($e, 'errors') || $e instanceof ErrorContextException)
                 ? $e->errors()
-                : ['message' => $e->getMessage(), 'code' => $e->getCode()];
+                : ['message' => $e->getMessage(), 'code' => $this->getStatusCode($e)];
 
             if (config('app.debug')) {
                 $errorsData['trace'] = $e->getTrace();

@@ -1,4 +1,6 @@
 # BOOKS-API
+[![CI Checks](https://github.com/gaalferov/books-api/actions/workflows/ci.yml/badge.svg)](https://github.com/gaalferov/books-api/actions/workflows/ci.yml)
+
 A Laravel-based API for getting books info, built with Clean Architecture principles and running in a Dockerized environment.
 
 ## Table of Contents
@@ -7,6 +9,7 @@ A Laravel-based API for getting books info, built with Clean Architecture princi
 - [Installation](#installation)
 - [Usage](#usage)
 - [Testing](#testing)
+- [Technical Details](#technical-details)
 
 
 ## Demo
@@ -67,3 +70,24 @@ make test
 ```bash
 make pint-test
 ```
+
+## Technical Details
+
+- **PHP Version**: The application runs on **PHP 8.3** with strict types enabled.
+- **Laravel Version**: Built using **Laravel 12**, adhering to modern PHP and Laravel best practices.
+- **OPcache** + **CacheTool**: Enabled for optimized performance and faster execution (prod).
+- **[GITHUB Actions](https://github.com/gaalferov/books-api/actions)**: CI/CD pipeline is set up using **GitHub Actions** for automated testing and deployment.
+  - Run Tests for all commits and PRs.
+  - Run Code Style Check for all commits and PRs.
+  - Composer validation for all commits and PRs.
+- **Caching**: API responses are cached using **Redis** for improved speed and reduced external API calls.
+- **API Providers**: Supports multiple API providers for fetching book data, ensuring flexibility and extensibility.
+- **Swagger Documentation**: Comprehensive API documentation is available via **Swagger**.
+- **Dockerized Environment**: The entire application, including services like Redis, runs in **Docker** containers for easy setup and deployment.
+- **Clean Architecture**: Designed with **Clean Architecture** principles, ensuring maintainability and scalability.
+- **SOLID Principles**: The codebase strictly adheres to **SOLID** principles for high-quality, professional-grade code.
+- **PSR-12 Coding Standard**: The project follows the **PSR-12** coding standard for consistency and readability.
+- **Testing**: Fully tested.
+    ```
+      Tests:    42 passed (122 assertions)
+    ```

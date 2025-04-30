@@ -19,7 +19,7 @@ readonly class BookFetcherService
         private readonly array $providers
     ) {}
 
-    public function fetchBooks(FormRequest $formRequest, ?string $providerName = null): BookListData
+    public function fetchBooks(FormRequest $formRequest, string $providerName): BookListData
     {
         if (! isset($this->providers[$providerName])) {
             throw new \InvalidArgumentException("Provider '{$providerName}' is not supported.");

@@ -51,7 +51,7 @@ class HealthCheckService
         return $serviceStatus;
     }
 
-    private function isRedisAvailable(): bool
+    protected function isRedisAvailable(): bool
     {
         try {
             Cache::store('redis')->put('health_check', 'OK', 10);
@@ -69,7 +69,7 @@ class HealthCheckService
         return false;
     }
 
-    private function isCacheAvailable(): bool
+    protected function isCacheAvailable(): bool
     {
         try {
             $testFile = 'health_check.txt';
