@@ -88,3 +88,6 @@ make pint-test
 - **SOLID Principles**: The codebase strictly adheres to **SOLID** principles for high-quality, professional-grade code.
 - **PSR-12 Coding Standard**: The project follows the **PSR-12** coding standard for consistency and readability.
 - **Testing**: Fully tested.
+    ```
+      Tests:    42 passed (122 assertions)
+    ```
