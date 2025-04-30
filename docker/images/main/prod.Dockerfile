@@ -61,7 +61,7 @@ RUN  mkdir /var/cache/nginx && \
      mkdir -p /etc/nginx/sites-enabled/
 
 COPY ./api /var/www/html
-COPY ./docker/conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
+COPY ./docker/conf/nginx/nginx-site-prod.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/conf/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/conf/php/php-fpm-www.conf /usr/local/etc/php-fpm.d/www.conf
 
