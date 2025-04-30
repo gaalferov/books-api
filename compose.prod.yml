@@ -13,6 +13,8 @@ services:
       - "traefik.http.routers.booksapi.tls=true"
       - "traefik.http.routers.booksapi.entrypoints=websecure"
       - "traefik.http.routers.booksapi.rule=Host(`sometestnewdomain.co.uk`)"
+      - "traefik.http.services.booksapi.loadbalancer.server.port=8080"
+      - "traefik.http.routers.booksapi.tls.certresolver=letsencrypt"
       - "traefik.docker.network=traefik-net"
     networks:
       - traefik-net
