@@ -19,13 +19,6 @@ use Tests\TestCase;
 
 class NYTimesBookProviderTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        // Ensure Laravel's application container is bootstrapped
-        $this->app->make('config');
-    }
-
     #[Test]
     #[DataProvider('fetchBooksDataProvider')]
     public function fetch_books_handles_responses_correctly(array $httpResponse, BookListData $expectedResult): void
