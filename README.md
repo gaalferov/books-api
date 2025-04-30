@@ -12,7 +12,7 @@ A Laravel-based API for getting books info, built with Clean Architecture princi
 ## Demo
 
 - **App Healthcheck**: [/api/healthcheck](https://sometestnewdomain.co.uk/api/healthcheck)
-- **Swagger Documentation**: [/api/v1/doc](https://sometestnewdomain.co.uk/api/v1/doc)
+- **Swagger Documentation**: [/api/v1/doc](https://sometestnewdomain.co.uk/api/v1/doc#/Books%20History)
 - **Books History API**: [/api/v1/books/history](https://sometestnewdomain.co.uk/api/v1/books/history)
 
 ## Requirements
@@ -53,9 +53,9 @@ make build-and-run
 ```
 
 ## Usage
-- **App Healthcheck**: [/api/healthcheck](http://localhost:8080/api/healthcheck)
-- **Swagger Documentation**: [/api/v1/doc](http://localhost:8080/api/v1/doc)
-- **Books History API**: [/api/v1/books/history](http://localhost:8080/api/v1/books/history)
+- **App Healthcheck**: [/api/healthcheck](http://localhost:8080/api/healthcheck) (localhost)
+- **Swagger Documentation**: [/api/v1/doc](http://localhost:8080/api/v1/doc) (localhost)
+- **Books History API**: [/api/v1/books/history](http://localhost:8080/api/v1/books/history) (localhost)
 
 
 ## Testing
