@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 /**
  * Class CacheUtil
  */
 class CacheUtil
 {
-    public static function generateCacheKey(FormRequest $formRequest): string
+    public static function generateCacheKey(string $prefix, ?string $queryString): string
     {
+        if (empty($queryString)) {
+            $queryString = 'empty';
+        }
+
         return hash(
             'sha256',
-            sprintf('%s:%s', get_class($formRequest), $formRequest->getQueryString())
+            sprintf('%s:%s', $prefix, $queryString)
         );
     }
 }

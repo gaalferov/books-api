@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V1\Book;
 
 use App\Http\Requests\Book\BookHistoryRequest;
 use App\Services\Book\BookFetcherService;
+use App\Services\Book\NYTimes\NYTimesBookProvider;
 use App\Utils\JsonResponseUtil;
 use Illuminate\Http\JsonResponse;
 
@@ -21,7 +22,10 @@ class BookHistoryController extends BookController
     public function __invoke(BookHistoryRequest $historyRequest): JsonResponse
     {
         return JsonResponseUtil::successResponse(
-            $this->bookFetcherService->fetchBooks($historyRequest)->getBooksAsArray()
+            $this->bookFetcherService->fetchBooks(
+                $historyRequest,
+                NYTimesBookProvider::class
+            )->getBooksAsArray()
         );
     }
 }

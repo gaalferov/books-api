@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
  */
 class NYTimesHttpClient
 {
-    private const HISTORY_ENDPOINT = '/svc/books/v3/lists/best-sellers/history.json';
+    public const HISTORY_ENDPOINT = '/svc/books/v3/lists/best-sellers/history.json';
 
     public function __construct(
         private readonly bool $cacheEnabled,
@@ -33,7 +33,7 @@ class NYTimesHttpClient
     {
         $queryParams = $formRequest->validated();
         if ($this->cacheEnabled) {
-            $cacheKey = CacheUtil::generateCacheKey($formRequest);
+            $cacheKey = CacheUtil::generateCacheKey(self::HISTORY_ENDPOINT, $formRequest->getQueryString());
             Log::info('Retrieving data from API call (CACHE ON)', [
                 'cacheKey' => $cacheKey,
                 'method' => __METHOD__,
